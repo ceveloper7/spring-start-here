@@ -24,11 +24,18 @@ public class ProductsController {
         return "products.html";
     }
 
+    /**
+     * Pasamos el model Product.
+     * Pasamos un objeto Product xq los request param son lo mismo que la clase Product
+     * Spring automaticamente crea el objeto
+     *
+     */
     @PostMapping(path = "/products")
-    public String addProduct(@RequestParam String name, @RequestParam double price, Model page){
-        Product p = new Product();
-        p.setName(name);
-        p.setPrice(price);
+    public String addProduct(Product p, Model page){
+    //public String addProduct(@RequestParam String name, @RequestParam double price, Model page){
+        //Product p = new Product();
+        //p.setName(name);
+        //p.setPrice(price);
 
         productService.addProduct(p);
 
