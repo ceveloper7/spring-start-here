@@ -1,6 +1,7 @@
 package com.gba.sprg_ch09_ex2.model;
 
 import com.gba.sprg_ch09_ex2.service.LoggedUserManagementService;
+import com.gba.sprg_ch09_ex2.service.LoginCountService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -11,14 +12,16 @@ import org.springframework.web.context.annotation.RequestScope;
 @RequestScope
 public class LoginProcessor {
     private final LoggedUserManagementService loggedUserManagementService;
+    private final LoginCountService loginCountService;
 
     // Solo necesitamos los valores de atributos username y password durante request
     private String username;
     private String password;
 
     // auto wired (constructor injection)
-    public LoginProcessor(LoggedUserManagementService loggedUserManagementService){
+    public LoginProcessor(LoggedUserManagementService loggedUserManagementService, LoginCountService loginCountService){
         this.loggedUserManagementService = loggedUserManagementService;
+        this.loginCountService = loginCountService;
     }
 
     public String getUsername() {
@@ -38,6 +41,8 @@ public class LoginProcessor {
     }
 
     public boolean login(){
+        loginCountService.increment();
+        
         String username = this.getUsername();
         String password = this.getPassword();
 

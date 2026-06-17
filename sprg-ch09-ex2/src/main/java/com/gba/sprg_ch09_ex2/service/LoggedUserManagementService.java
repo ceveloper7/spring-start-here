@@ -7,6 +7,7 @@ import org.springframework.web.context.annotation.SessionScope;
 /**
  * Cada vez que el usuario se loggea exitosamente almacenamos el nombre de usuario
  * en un bean llamado LoggedUserManagementService con atributo username
+ * @SessionScope permite que el username sea accesible durante toda la sesion http
  */
 @Service
 @SessionScope
